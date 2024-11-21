@@ -26,6 +26,10 @@ rango_tiempo = f"{min_year}-{max_year}"
 # Agrupar la información por SECTOR y calcular el total de matrículas por sector
 matricula_por_sector = df_matricula.groupby('SECTOR')['TOTAL_MATRICULA'].sum().reset_index()
 
+# Log en consola del total de matrículas por sector
+print("Total de matrículas por sector:")
+print(matricula_por_sector)
+
 # Definir colores para la gráfica
 colors = plt.get_cmap('tab10')(np.linspace(0, 1, len(matricula_por_sector)))
 
@@ -36,7 +40,7 @@ bars = plt.bar(matricula_por_sector['SECTOR'], matricula_por_sector['TOTAL_MATRI
 # Configuración del gráfico
 plt.title(f'Desglose de Matrícula por Sector (Público vs. Privado) \nPeriodo: {rango_tiempo}')
 plt.xlabel('Sector')
-plt.ylabel('Total de Matrículas')
+plt.ylabel('Matrículas en millones de estudiantes')
 
 # Formatear el eje Y para que muestre los valores en millones
 plt.gca().get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f'{int(x / 1_000_000)}M'))

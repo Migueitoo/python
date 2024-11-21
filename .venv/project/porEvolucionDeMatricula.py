@@ -25,19 +25,14 @@ evolucion_matricula = matricula_agrupada.groupby('ANNO_INF')['TOTAL_MATRICULA'].
 plt.figure(figsize=(12, 6))
 plt.plot(evolucion_matricula['ANNO_INF'], evolucion_matricula['TOTAL_MATRICULA'], marker='o')
 
+# Formatear los valores del eje Y en millones
+plt.gca().get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x / 1_000_000:.1f}M'))
+
 # Configuración del gráfico
-plt.title('Evolución de la Matrícula a lo Largo de los Años (Ajustada)')
+plt.title('Evolución de la Matrícula a lo Largo de los Años')
 plt.xlabel('Año')
-plt.ylabel('Total de Matrículas')
+plt.ylabel('Matrículas en millones de estudiantes')
 plt.grid(True)
 
 # Guardar el gráfico en un archivo
-plt.savefig("evolucion_matricula_ajustada.png")
-
-# Mostrar los totales por grado para verificar la agregación general
-matriculas_por_grado = df_matricula.groupby('GRADO')['TOTAL_MATRICULA'].sum().reset_index()
-print(matriculas_por_grado)
-
-# Agrupar y mostrar un resumen de la matrícula por departamento para ver tendencias generales
-matriculas_por_departamento = df_matricula.groupby('DEPARTAMENTO')['TOTAL_MATRICULA'].sum().reset_index()
-print(matriculas_por_departamento)
+plt.savefig("evolucion_matricula_en_millones.png")

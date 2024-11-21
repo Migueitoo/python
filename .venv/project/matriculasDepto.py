@@ -27,6 +27,10 @@ matricula_por_departamento = df_matricula.groupby('DEPARTAMENTO')['TOTAL_MATRICU
 # Ordenar los datos por el total de matrículas de forma descendente para un mejor análisis visual
 matricula_por_departamento = matricula_por_departamento.sort_values(by='TOTAL_MATRICULA', ascending=False)
 
+# Log en consola del total de matrículas por departamento
+print("Total de matrículas por departamento:")
+print(matricula_por_departamento)
+
 # Definir colores para la gráfica
 num_departamentos = len(matricula_por_departamento)
 colors = plt.get_cmap('tab20')(np.linspace(0, 1, num_departamentos))
@@ -38,7 +42,7 @@ bars = plt.bar(matricula_por_departamento['DEPARTAMENTO'], matricula_por_departa
 # Configuración del gráfico
 plt.title(f'Distribución de Matrículas por Departamento \nPeriodo: {rango_tiempo}')
 plt.xlabel('Departamento')
-plt.ylabel('Total de Matrículas')
+plt.ylabel('Matrículas en millones de estudiantes')
 plt.xticks(rotation=60, ha='right', fontsize=10)  # Rotar etiquetas y ajustar el tamaño de fuente
 
 # Formatear el eje Y para que muestre los valores en millones

@@ -24,6 +24,10 @@ rango_tiempo = f"{min_year}-{max_year}"
 # Agrupar la información por GRADO y calcular el total de matrículas por grado
 matricula_por_grado = df_matricula.groupby('GRADO')['TOTAL_MATRICULA'].sum().reset_index()
 
+# Log en consola del total de matrículas por grado
+print("Total de matrículas por grado educativo:")
+print(matricula_por_grado)
+
 # Ordenar los datos por el total de matrículas de forma descendente para un mejor análisis visual
 matricula_por_grado = matricula_por_grado.sort_values(by='TOTAL_MATRICULA', ascending=False)
 
@@ -38,7 +42,7 @@ bars = plt.bar(matricula_por_grado['GRADO'], matricula_por_grado['TOTAL_MATRICUL
 # Configuración del gráfico
 plt.title(f'Distribución de Matrículas por Grado Educativo \nPeriodo: {rango_tiempo}')
 plt.xlabel('Grado')
-plt.ylabel('Total de Matrículas')
+plt.ylabel('Matrículas en millones de estudiantes')
 plt.xticks(rotation=60, ha='right', fontsize=10)  # Rotar etiquetas y ajustar el tamaño de fuente
 
 # Formatear el eje Y para que muestre los valores en millones
