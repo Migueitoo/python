@@ -51,7 +51,13 @@ plt.gca().get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f'{int(
 # Agregar etiquetas con los valores exactos encima de cada barra
 for bar in bars:
     height = bar.get_height()
-    plt.text(bar.get_x() + bar.get_width() / 2, height, f'{int(height / 1_000_000)}M', ha='center', va='bottom')
+    if height >= 1_000_000:
+        # Mostrar en millones si es igual o mayor a un millón
+        label = f'{int(height / 1_000_000)}M'
+    else:
+        # Mostrar el valor exacto si es menor a un millón
+        label = f'{int(height):,}'
+    plt.text(bar.get_x() + bar.get_width() / 2, height, label, ha='center', va='bottom')
 
 plt.grid(axis='y', linestyle='--', alpha=0.6)
 
